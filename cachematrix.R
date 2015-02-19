@@ -40,14 +40,17 @@ cacheSolve <- function(x, ...) {
     oldv <- currMakeCacheMatrix$get()
     
     ## check if matrix has changed
-    if(all(v==oldv) ) {
+    if(identical(v,oldv) ) {
       ## get previously calculated inverse
       oldm <- currMakeCacheMatrix$getinverse()
       
-      if(!is.null(m) ) {
+      if(!is.null(oldm) ) {
         message("getting cached data")
         return(oldm)
       }
+    }else{
+      ## matrix has changed
+      print(which(v!=oldv))
     }
   }
   
